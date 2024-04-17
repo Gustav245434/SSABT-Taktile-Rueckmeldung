@@ -2,19 +2,21 @@ import machine
 import utime
 import time
 import math
-#Setup the onboard LED Pin as an output
-LED = machine.Pin(5)
+# Code zur Vibration
 
 vibrationsmotor = machine.PWM(5)
 
+class Muster:
+    def m1(self, delay):
+        vibrationsmotor.freq(9000)
+        vibrationsmotor.duty(1000)
+        utime.sleep(delay)
+        vibrationsmotor.freq(5)
+        vibrationsmotor.duty(0)
+        utime.sleep(delay)
+        
+muster=Muster()
 
-
-
-vibrationsmotor.duty(1000)
-
-for num in range(1,6):
-if vibrationsmotor.freq < 9000:
-vibrationsmotor.freq(0)
-
-else:
-vibrationsmotor.freq(9000)
+muster.m1(0.5)
+muster.m1(1)
+muster.m1(0.5)
